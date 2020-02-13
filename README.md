@@ -3,7 +3,7 @@ A repo to deploy nordmart microservices
 
 ## Nordmart overview
 
-For overview visit: [Nordmart](https://playbook.stakater.com/content/workshop/nordmart/nordmart-scenario.html)
+For overview visit: [Nordmart](https://playbook.stakater.com/content/nordmart/nordmart-intro.html)
 
 ## Install from local machine
 
