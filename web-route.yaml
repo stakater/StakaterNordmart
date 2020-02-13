@@ -2,13 +2,13 @@ apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
   labels:
-    app.kubernetes.io/instance: NAMESPACE-web
+    app.kubernetes.io/instance: NAMESPACE_NAME-web
     app.kubernetes.io/managed-by: Tiller
     app.kubernetes.io/name: web
     expose: "true"
   name: web
 spec:
-  host: web-NAMESPACE.DOMAIN
+  host: web-NAMESPACE_NAME.DOMAIN
   port:
     targetPort: tcp
   tls:

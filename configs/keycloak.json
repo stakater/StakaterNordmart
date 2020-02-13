@@ -492,18 +492,18 @@
     {
       "id": "d2c95900-9fa3-4613-b41c-687db71d90f6",
       "clientId": "stakater-nordmart-web",
-      "rootUrl": "https://web-NAMESPACE.DOMAIN/",
-      "adminUrl": "https://web-NAMESPACE.DOMAIN/",
+      "rootUrl": "https://web-NAMESPACE_NAME.DOMAIN/",
+      "adminUrl": "https://web-NAMESPACE_NAME.DOMAIN/",
       "baseUrl": "",
       "surrogateAuthRequired": false,
       "enabled": true,
       "clientAuthenticatorType": "client-secret",
       "secret": "**********",
       "redirectUris": [
-        "https://web-NAMESPACE.DOMAIN/*"
+        "https://web-NAMESPACE_NAME.DOMAIN/*"
       ],
       "webOrigins": [
-        "https://web-NAMESPACE.DOMAIN"
+        "https://web-NAMESPACE_NAME.DOMAIN"
       ],
       "notBefore": 0,
       "bearerOnly": false,

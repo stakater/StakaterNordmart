@@ -13,8 +13,8 @@ find . -type f -name "*.yaml" -print0 | xargs -0 sed -i "s|DOMAIN|${DOMAIN}|g"
 find . -type f -name "*.json" -print0 | xargs -0 sed -i "s|DOMAIN|${DOMAIN}|g"
 
 #Replace NAMESPACE placeholder
-find . -type f -name "*.yaml" -print0 | xargs -0 sed -i "s|NAMESPACE|${NAMESPACE_NAME}|g"
-find . -type f -name "*.json" -print0 | xargs -0 sed -i "s|NAMESPACE|${NAMESPACE_NAME}|g"
+find . -type f -name "*.yaml" -print0 | xargs -0 sed -i "s|NAMESPACE_NAME|${NAMESPACE_NAME}|g"
+find . -type f -name "*.json" -print0 | xargs -0 sed -i "s|NAMESPACE_NAME|${NAMESPACE_NAME}|g"
 
 #Replace KEYCLOAK_CONFIG
 KEYCLOAK_CONFIG=`cat configs/keycloak.json | base64 -w 0`
