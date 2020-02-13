@@ -20,6 +20,9 @@ find . -type f -name "*.json" -print0 | xargs -0 sed -i "s|NAMESPACE|${NAMESPACE
 KEYCLOAK_CONFIG=`cat configs/keycloak.json | base64 -w 0`
 sed -i "s|KEYCLOAK_CONFIG|${KEYCLOAK_CONFIG}|g" secrets/secret-keycloak-config.yaml
 
+#Create namespace
+oc create namespace $NAMESPACE_NAME
+
 #Fix permission issue on openshift
 oc adm policy add-scc-to-user privileged system:serviceaccount:$NAMESPACE_NAME:default
 
