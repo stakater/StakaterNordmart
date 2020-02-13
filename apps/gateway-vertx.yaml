@@ -1,0 +1,153 @@
+---
+# Source: application/templates/serviceaccount.yaml
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: gateway
+    group: com.stakater.platform
+    provider: stakater
+    version: "1.0.0"
+    chart: "application-0.0.12"
+    release: "RELEASE-NAME"
+    heritage: "Tiller"
+  name: gateway
+---
+# Source: application/templates/service.yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: gateway
+    group: com.stakater.platform
+    provider: stakater
+    version: "1.0.0"
+    chart: "application-0.0.12"
+    release: "RELEASE-NAME"
+    heritage: "Tiller"
+  name: gateway
+spec:
+  selector:
+    app: gateway
+    
+  ports:
+    - name: https
+      port: 8080
+      targetPort: 8080
+    
+---
+# Source: application/templates/deployment.yaml
+
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: gateway
+    group: com.stakater.platform
+    provider: stakater
+    version: "1.0.0"
+    chart: "application-0.0.12"
+    release: "RELEASE-NAME"
+    heritage: "Tiller"
+  annotations:
+    reloader.stakater.com/auto: "true"
+    
+  name: gateway
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: gateway
+        group: com.stakater.platform
+        provider: stakater
+        version: "1.0.0"
+        chart: "application-0.0.12"
+        release: "RELEASE-NAME"
+        heritage: "Tiller"
+        app: gateway
+        
+    spec:
+      containers:
+      - name: gateway
+        image: "stakater/stakater-nordmart-gateway-vertx:v0.0.1"
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: CUSTOMER_API_HOST
+            value: customer
+          - name: CUSTOMER_API_PORT
+            value: "8080"
+          - name: CATALOG_API_HOST
+            value: catalog
+          - name: CATALOG_API_PORT
+            value: "8080"
+          - name: INVENTROY_API_HOST
+            value: inventory
+          - name: INVENTROY_API_PORT
+            value: "8080"
+          - name: DISABLE_CART_DISCOVERY
+            value: "false"
+          - name: CART_API_HOST
+            value: cart
+          - name: CART_API_PORT
+            value: "8080"
+          - name: PRODUCT_SEARCH_API_HOST
+            value: search
+          - name: PRODUCT_SEARCH_API_PORT
+            value: "8080"
+          - name: REVIEW_API_HOST
+            value: review
+          - name: REVIEW_API_PORT
+            value: "8080"
+          - name: HTTP_PORT
+            value: "8080"
+          
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        
+      serviceAccountName: default
+---
+# Source: application/templates/ingress.yaml
+
+---
+# Source: application/templates/clusterrole.yaml
+
+---
+# Source: application/templates/clusterrolebinding.yaml
+
+---
+# Source: application/templates/configmap.yaml
+
+---
+# Source: application/templates/pvc.yaml
+
+---
+# Source: application/templates/role-binding.yaml
+
+---
+# Source: application/templates/role.yaml
+
+---
+# Source: application/templates/routes.yaml
+
+---
+# Source: application/templates/secret.yaml
+

@@ -1,0 +1,174 @@
+---
+# Source: postgresql/templates/svc-headless.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: NAMESPACE_NAME-postgresql-headless
+  labels:
+    app: postgresql
+    chart: postgresql-6.3.6
+    release: "NAMESPACE_NAME-postgresql"
+    heritage: "Tiller"
+spec:
+  type: ClusterIP
+  clusterIP: None
+  ports:
+    - name: postgresql
+      port: 5432
+      targetPort: postgresql
+  selector:
+    app: postgresql
+    release: "NAMESPACE_NAME-postgresql"
+
+---
+# Source: postgresql/templates/svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: NAMESPACE_NAME-postgresql
+  labels:
+    app: postgresql
+    chart: postgresql-6.3.6
+    release: "NAMESPACE_NAME-postgresql"
+    heritage: "Tiller"
+spec:
+  type: ClusterIP
+  ports:
+    - name: postgresql
+      port: 5432
+      targetPort: postgresql
+  selector:
+    app: postgresql
+    release: "NAMESPACE_NAME-postgresql"
+    role: master
+
+---
+# Source: postgresql/templates/statefulset.yaml
+apiVersion: apps/v1beta2
+kind: StatefulSet
+metadata:
+  name: NAMESPACE_NAME-postgresql-postgresql
+  labels:
+    app: postgresql
+    chart: postgresql-6.3.6
+    release: "NAMESPACE_NAME-postgresql"
+    heritage: "Tiller"
+spec:
+  serviceName: NAMESPACE_NAME-postgresql-headless
+  replicas: 1
+  updateStrategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: postgresql
+      release: "NAMESPACE_NAME-postgresql"
+      role: master
+  template:
+    metadata:
+      name: NAMESPACE_NAME-postgresql
+      labels:
+        app: postgresql
+        chart: postgresql-6.3.6
+        release: "NAMESPACE_NAME-postgresql"
+        heritage: "Tiller"
+        role: master
+    spec:
+      containers:
+        - name: NAMESPACE_NAME-postgresql
+          image: docker.io/bitnami/postgresql:11.5.0-debian-9-r26
+          imagePullPolicy: "Always"
+          resources:
+            limits:
+              cpu: 250m
+              memory: 256Mi
+            requests:
+              cpu: 250m
+              memory: 256Mi
+
+          env:
+            - name: BITNAMI_DEBUG
+              value: "false"
+            - name: POSTGRESQL_PORT_NUMBER
+              value: "5432"
+            - name: POSTGRESQL_VOLUME_DIR
+              value: "/bitnami/postgresql"
+            - name: PGDATA
+              value: "/bitnami/postgresql/data"
+            - name: POSTGRES_USER
+              value: "keycloak"
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: postgresql-password
+            - name: POSTGRES_DB
+              value: "keycloak-db"
+          ports:
+            - name: postgresql
+              containerPort: 5432
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - exec pg_isready -U "keycloak" -d "keycloak-db" -h 127.0.0.1 -p 5432
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 6
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - |
+                  pg_isready -U "keycloak" -d "keycloak-db" -h 127.0.0.1 -p 5432
+                  [ -f /opt/bitnami/postgresql/tmp/.initialized ]
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 6
+          volumeMounts:
+      volumes:
+        - name: data
+          emptyDir: {}
+
+---
+# Source: postgresql/templates/configmap.yaml
+
+
+---
+# Source: postgresql/templates/extended-config-configmap.yaml
+
+
+---
+# Source: postgresql/templates/initialization-configmap.yaml
+
+
+---
+# Source: postgresql/templates/metrics-svc.yaml
+
+
+---
+# Source: postgresql/templates/networkpolicy.yaml
+
+
+---
+# Source: postgresql/templates/secrets.yaml
+
+---
+# Source: postgresql/templates/serviceaccount.yaml
+
+---
+# Source: postgresql/templates/servicemonitor.yaml
+
+
+---
+# Source: postgresql/templates/statefulset-slaves.yaml
+
+
+---
+# Source: postgresql/templates/svc-read.yaml
+
