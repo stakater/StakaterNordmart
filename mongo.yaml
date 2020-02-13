@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongodb
+spec:
+  serviceName: "mongodb"
+  selector:
+    matchLabels:
+      app: mongodb
+  replicas: 1
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:   
+      containers:
+      - image: mongo:3.4
+        name: mongodb
+        ports:
+        - containerPort: 27017
+          name: tcp
+        volumeMounts:
+        - mountPath: /data/db
+          name: data      
+        resources: {}
+
+      volumes:
+        - name: data
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mongodb
+  name: mongodb-svc
+spec:
+  ports:
+  - name: "mongo-port"
+    port: 27017
+    targetPort: 27017
+  selector:
+    app: mongodb

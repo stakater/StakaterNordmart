@@ -1,0 +1,134 @@
+---
+# Source: application/templates/serviceaccount.yaml
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: cart
+    group: com.stakater.platform
+    provider: stakater
+    version: "1.0.0"
+    chart: "application-0.0.12"
+    release: "RELEASE-NAME"
+    heritage: "Tiller"
+  name: cart
+---
+# Source: application/templates/service.yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: cart
+    group: com.stakater.platform
+    provider: stakater
+    version: "1.0.0"
+    chart: "application-0.0.12"
+    release: "RELEASE-NAME"
+    heritage: "Tiller"
+  name: cart
+spec:
+  selector:
+    app: cart
+    
+  ports:
+    - name: https
+      port: 8080
+      targetPort: 8080
+    
+---
+# Source: application/templates/deployment.yaml
+
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: cart
+    group: com.stakater.platform
+    provider: stakater
+    version: "1.0.0"
+    chart: "application-0.0.12"
+    release: "RELEASE-NAME"
+    heritage: "Tiller"
+  name: cart
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cart
+        group: com.stakater.platform
+        provider: stakater
+        version: "1.0.0"
+        chart: "application-0.0.12"
+        release: "RELEASE-NAME"
+        heritage: "Tiller"
+        app: cart
+        
+    spec:
+      containers:
+      - name: cart
+        image: "stakater/stakater-nordmart-cart:v0.0.2"
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: CATALOG_ENDPOINT
+            value: catalog:8080
+          - name: KEYCLOAK_REALM
+            value: nordmart
+          - name: KEYCLOAK_URL
+            value: https://keycloak-NAMESPACE.DOMAIN
+          - name: KEYCLOAK_CLIENT_BACKEND
+            value: stakater-nordmart-backend
+          - name: KEYCLOAK_CLIENT_SECRET_KEY
+            value: 7672aea2-81ff-4aa2-affe-daf3bad10334
+          - name: JAEGER_ENDPOINT
+            value: http://jaeger-collector.istio-system:14268/api/traces
+          
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        
+      serviceAccountName: cart        
+---
+# Source: application/templates/clusterrole.yaml
+
+---
+# Source: application/templates/clusterrolebinding.yaml
+
+---
+# Source: application/templates/configmap.yaml
+
+---
+# Source: application/templates/ingress.yaml
+
+---
+# Source: application/templates/pvc.yaml
+
+---
+# Source: application/templates/role-binding.yaml
+
+---
+# Source: application/templates/role.yaml
+
+---
+# Source: application/templates/routes.yaml
+
+---
+# Source: application/templates/secret.yaml
+

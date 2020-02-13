@@ -1,0 +1,21 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app.kubernetes.io/instance: NAMESPACE-gateway
+    app.kubernetes.io/managed-by: Tiller
+    app.kubernetes.io/name: gateway
+    expose: "true"
+  name: gateway
+spec:
+  host: gateway-NAMESPACE.DOMAIN
+  port:
+    targetPort: https
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: edge
+  to:
+    kind: Service
+    name: gateway
+    weight: 100
+  wildcardPolicy: None

@@ -1,0 +1,14 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: NAMESPACE-kafka-operator
+spec:
+  releaseName: NAMESPACE-kafka-operator
+  chart:
+    repository: https://strimzi.io/charts/
+    name: strimzi-kafka-operator
+    version: 0.16.0
+  values:
+    watchNamespaces:
+      - NAMESPACE
+    watchAnyNamespace: false

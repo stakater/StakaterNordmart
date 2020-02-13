@@ -1,0 +1,147 @@
+---
+# Source: application/templates/serviceaccount.yaml
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: catalog
+    group: com.stakater.platform
+    provider: stakater
+    version: "1.0.0"
+    chart: "application-0.0.12"
+    release: "RELEASE-NAME"
+    heritage: "Tiller"
+  name: catalog
+---
+# Source: application/templates/service.yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: catalog
+    group: com.stakater.platform
+    provider: stakater
+    version: "1.0.0"
+    chart: "application-0.0.12"
+    release: "RELEASE-NAME"
+    heritage: "Tiller"
+  name: catalog
+spec:
+  selector:
+    app: catalog
+    
+  ports:
+    - name: https
+      port: 8080
+    
+---
+# Source: application/templates/deployment.yaml
+
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: catalog
+    group: com.stakater.platform
+    provider: stakater
+    version: "1.0.0"
+    chart: "application-0.0.12"
+    release: "RELEASE-NAME"
+    heritage: "Tiller"
+  name: catalog
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: catalog
+        group: com.stakater.platform
+        provider: stakater
+        version: "1.0.0"
+        chart: "application-0.0.12"
+        release: "RELEASE-NAME"
+        heritage: "Tiller"
+        app: catalog
+        
+    spec:
+      containers:
+      - name: catalog
+        image: "stakater/stakater-nordmart-catalog:v0.0.2"
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: MYSQL_USER
+            valueFrom:
+              secretKeyRef:
+                key: mysql_username
+                name: mysql-secret
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: mysql_password
+                name: mysql-secret
+          - name: MYSQL_HOST
+            value: mysql-svc
+          - name: MYSQL_DB_NAME
+            value: catalog
+          - name: KEYCLOAK_REALM
+            value: nordmart
+          - name: KEYCLOAK_URL
+            value: https://keycloak-NAMESPACE.DOMAIN
+          - name: KEYCLOAK_CLIENT_BACKEND
+            value: stakater-nordmart-backend
+          - name: KEYCLOAK_CLIENT_SECRET_KEY
+            value: 7672aea2-81ff-4aa2-affe-daf3bad10334
+          - name: KAFKA_ADDRESS
+            value: kafka-cluster-kafka-bootstrap:9092
+          - name: JAEGER_ENDPOINT
+            value: http://jaeger-collector.istio-system:14268/api/traces
+          
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 60
+          successThreshold: 1
+          timeoutSeconds: 1
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 60
+          successThreshold: 1
+          timeoutSeconds: 1
+        
+      serviceAccountName: catalog        
+---
+# Source: application/templates/clusterrole.yaml
+
+---
+# Source: application/templates/clusterrolebinding.yaml
+
+---
+# Source: application/templates/configmap.yaml
+
+---
+# Source: application/templates/ingress.yaml
+
+---
+# Source: application/templates/pvc.yaml
+
+---
+# Source: application/templates/role-binding.yaml
+
+---
+# Source: application/templates/role.yaml
+
+---
+# Source: application/templates/routes.yaml
+
+---
+# Source: application/templates/secret.yaml
+

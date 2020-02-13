@@ -1,0 +1,164 @@
+---
+# Source: application/templates/serviceaccount.yaml
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: web
+    group: com.stakater.platform
+    provider: stakater
+    version: "1.0.0"
+    chart: "application-0.0.12"
+    release: "RELEASE-NAME"
+    heritage: "Tiller"
+  name: web
+---
+# Source: application/templates/service.yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: web
+    group: com.stakater.platform
+    provider: stakater
+    version: "1.0.0"
+    chart: "application-0.0.12"
+    release: "RELEASE-NAME"
+    heritage: "Tiller"
+  name: web
+spec:
+  selector:
+    app: web
+    
+  ports:
+    - name: tcp
+      port: 4200
+      protocol: TCP
+      targetPort: 4200
+    
+---
+# Source: application/templates/deployment.yaml
+
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: web
+    group: com.stakater.platform
+    provider: stakater
+    version: "1.0.0"
+    chart: "application-0.0.12"
+    release: "RELEASE-NAME"
+    heritage: "Tiller"
+  name: web
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: web
+        group: com.stakater.platform
+        provider: stakater
+        version: "1.0.0"
+        chart: "application-0.0.12"
+        release: "RELEASE-NAME"
+        heritage: "Tiller"
+        app: web
+        
+    spec:
+      containers:
+      - name: web
+        image: "stakater/stakater-nordmart-web:v0.0.4"
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: PORT
+            value: "4200"
+          - name: SECURE_GW_ENDPOINT
+            value: https://gateway-NAMESPACE.DOMAIN
+          - name: SSO_URL
+            value: https://keycloak-NAMESPACE.DOMAIN/auth
+          - name: SSO_REALM
+            value: nordmart
+          - name: SSO_CLIENT_ID
+            value: stakater-nordmart-web
+          - name: JAEGER_ENDPOINT
+            value: http://jaeger-collector.istio-system:14268/api/traces
+          
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 4200
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 4200
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        
+      serviceAccountName: web        
+---
+# Source: application/templates/ingress.yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: web
+  labels:
+    app: web
+    group: com.stakater.platform
+    provider: stakater
+    version: "1.0.0"
+    chart: "application-0.0.12"
+    release: "RELEASE-NAME"
+    heritage: "Tiller"
+  annotations:
+    forecastle.stakater.com/appName: Web-NAMESPACE
+    forecastle.stakater.com/expose: true
+    forecastle.stakater.com/group: Nordmart
+    forecastle.stakater.com/icon: https://github.com/stakater/ForecastleIcons/raw/master/stakater.png
+    ingress.kubernetes.io/force-ssl-redirect: true
+    ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: external-ingress
+    monitor.stakater.com/enabled: true
+spec:
+  rules:
+    - host: web-NAMESPACE.DOMAIN
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: web
+              servicePort: 4200
+---
+# Source: application/templates/clusterrole.yaml
+
+---
+# Source: application/templates/clusterrolebinding.yaml
+
+---
+# Source: application/templates/configmap.yaml
+
+---
+# Source: application/templates/pvc.yaml
+
+---
+# Source: application/templates/role-binding.yaml
+
+---
+# Source: application/templates/role.yaml
+
+---
+# Source: application/templates/routes.yaml
+
+---
+# Source: application/templates/secret.yaml
+

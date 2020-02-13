@@ -1,0 +1,136 @@
+---
+# Source: application/templates/serviceaccount.yaml
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: customer
+    group: com.stakater.platform
+    provider: stakater
+    version: "1.0.0"
+    chart: "application-0.0.12"
+    release: "RELEASE-NAME"
+    heritage: "Tiller"
+  name: customer
+---
+# Source: application/templates/service.yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: customer
+    group: com.stakater.platform
+    provider: stakater
+    version: "1.0.0"
+    chart: "application-0.0.12"
+    release: "RELEASE-NAME"
+    heritage: "Tiller"
+  name: customer
+spec:
+  selector:
+    app: customer
+    
+  ports:
+    - name: https
+      port: 8080
+      targetPort: 8080
+    
+---
+# Source: application/templates/deployment.yaml
+
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: customer
+    group: com.stakater.platform
+    provider: stakater
+    version: "1.0.0"
+    chart: "application-0.0.12"
+    release: "RELEASE-NAME"
+    heritage: "Tiller"
+  name: customer
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: customer
+        group: com.stakater.platform
+        provider: stakater
+        version: "1.0.0"
+        chart: "application-0.0.12"
+        release: "RELEASE-NAME"
+        heritage: "Tiller"
+        app: customer
+        
+    spec:
+      containers:
+      - name: customer
+        image: "stakater/stakater-nordmart-customer:v0.0.1"
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: CATALOG_ENDPOINT
+            value: catalog:8080
+          - name: CASSANDRA_HOST
+            value: cassandra
+          - name: KEYCLOAK_REALM
+            value: nordmart
+          - name: KEYCLOAK_URL
+            value: https://keycloak-NAMESPACE.DOMAIN
+          - name: KEYCLOAK_CLIENT_BACKEND
+            value: stakater-nordmart-backend
+          - name: KEYCLOAK_CLIENT_SECRET_KEY
+            value: 7672aea2-81ff-4aa2-affe-daf3bad10334
+          - name: JAEGER_ENDPOINT
+            value: http://jaeger-collector.istio-system:14268/api/traces
+          
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        
+      serviceAccountName: customer        
+---
+# Source: application/templates/clusterrole.yaml
+
+---
+# Source: application/templates/clusterrolebinding.yaml
+
+---
+# Source: application/templates/configmap.yaml
+
+---
+# Source: application/templates/ingress.yaml
+
+---
+# Source: application/templates/pvc.yaml
+
+---
+# Source: application/templates/role-binding.yaml
+
+---
+# Source: application/templates/role.yaml
+
+---
+# Source: application/templates/routes.yaml
+
+---
+# Source: application/templates/secret.yaml
+
