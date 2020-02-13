@@ -30,11 +30,11 @@ oc adm policy add-scc-to-user privileged system:serviceaccount:$NAMESPACE_NAME:d
 oc apply -f secrets/ --namespace=$NAMESPACE_NAME 2>/dev/null
 
 n=0
-until [ $n -ge 5 ]
+until [ $n -ge 3 ]
 do
    oc apply -R -f . --namespace=$NAMESPACE_NAME 2>/dev/null && break
    n=$[$n+1]
-   echo "Retrying for $n/5 times..."
+   echo "Retrying for $n/3 times..."
 done
 
 echo "Front-end URL: web-$NAMESPACE_NAME.$DOMAIN"
