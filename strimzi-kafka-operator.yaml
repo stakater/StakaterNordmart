@@ -8003,7 +8003,7 @@ spec:
             - /opt/strimzi/bin/cluster_operator_run.sh
           env:
             - name: STRIMZI_NAMESPACE
-              value: "NAMESPACE,NAMESPACE_NAME"
+              value: "NAMESPACE_NAME"
             - name: STRIMZI_FULL_RECONCILIATION_INTERVAL_MS
               value: "120000"
             - name: STRIMZI_OPERATION_TIMEOUT_MS
