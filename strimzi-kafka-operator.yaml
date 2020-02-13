@@ -7847,7 +7847,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: strimzi-cluster-operator
-  namespace: NAMESPACE
+  namespace: NAMESPACE_NAME
   labels:
     app: strimzi
     chart: strimzi-kafka-operator-0.16.0
@@ -7891,7 +7891,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: strimzi-cluster-operator-entity-operator-delegation
-  namespace: NAMESPACE
+  namespace: NAMESPACE_NAME
   labels:
     app: strimzi
     chart: strimzi-kafka-operator-0.16.0
@@ -7935,7 +7935,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: strimzi-cluster-operator-topic-operator-delegation
-  namespace: NAMESPACE
+  namespace: NAMESPACE_NAME
   labels:
     app: strimzi
     chart: strimzi-kafka-operator-0.16.0
