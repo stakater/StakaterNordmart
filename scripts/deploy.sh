@@ -27,5 +27,15 @@ oc create namespace $NAMESPACE_NAME
 oc adm policy add-scc-to-user privileged system:serviceaccount:$NAMESPACE_NAME:default
 
 #Apply manifests
-oc apply -f secrets/ --namespace=$NAMESPACE_NAME
-oc apply -R -f . --namespace=$NAMESPACE_NAME
+oc apply -f secrets/ --namespace=$NAMESPACE_NAME 2>/dev/null
+
+n=0
+until [ $n -ge 5 ]
+do
+   oc apply -R -f . --namespace=$NAMESPACE_NAME 2>/dev/null && break
+   n=$[$n+1]
+   echo "Retrying for $n/5 times..."
+done
+
+echo "Front-end URL: web-$NAMESPACE_NAME.$DOMAIN"
+echo "Gateway URL: gateway-$NAMESPACE_NAME.$DOMAIN"
