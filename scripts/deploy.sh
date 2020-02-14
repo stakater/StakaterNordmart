@@ -24,7 +24,6 @@ sed -i "s|KEYCLOAK_CONFIG|${KEYCLOAK_CONFIG}|g" secrets/secret-keycloak-config.y
 oc create namespace $NAMESPACE_NAME
 
 #Fix permission issue on openshift
-oc adm policy add-scc-to-user privileged system:serviceaccount:$NAMESPACE_NAME:default
 oc adm policy add-scc-to-user anyuid system:serviceaccount:$NAMESPACE_NAME:default
 
 #Apply manifests
