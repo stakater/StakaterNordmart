@@ -1,0 +1,17 @@
+apiVersion: "monitoring.coreos.com/v1"
+kind: ServiceMonitor
+metadata:
+  name: stakater-nordmart-catalog-monitor
+  labels:
+    k8s-app: NAMESPACE_NAME-monitor
+spec:
+  endpoints:
+  - interval: 10s
+    path: /actuator/prometheus
+    port: https
+  selector:
+    matchLabels:
+      app: catalog
+  namespaceSelector:
+    matchNames:
+    - NAMESPACE_NAME
