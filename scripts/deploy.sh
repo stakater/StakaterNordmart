@@ -22,6 +22,7 @@ sed -i "s|KEYCLOAK_CONFIG|${KEYCLOAK_CONFIG}|g" secrets/secret-keycloak-config.y
 
 #Create namespace
 oc create namespace $NAMESPACE_NAME
+oc label namespace $NAMESPACE_NAME prometheus=stakater-workload-monitoring
 
 #Fix permission issue on openshift
 oc adm policy add-scc-to-user anyuid system:serviceaccount:$NAMESPACE_NAME:default
