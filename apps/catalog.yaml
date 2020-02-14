@@ -10,7 +10,7 @@ metadata:
     provider: stakater
     version: "1.0.0"
     chart: "application-0.0.12"
-    release: "RELEASE-NAME"
+    release: "NAMESPACE_NAME-catalog"
     heritage: "Tiller"
   name: catalog
 ---
@@ -25,7 +25,7 @@ metadata:
     provider: stakater
     version: "1.0.0"
     chart: "application-0.0.12"
-    release: "RELEASE-NAME"
+    release: "NAMESPACE_NAME-catalog"
     heritage: "Tiller"
   name: catalog
 spec:
@@ -48,7 +48,7 @@ metadata:
     provider: stakater
     version: "1.0.0"
     chart: "application-0.0.12"
-    release: "RELEASE-NAME"
+    release: "NAMESPACE_NAME-catalog"
     heritage: "Tiller"
   name: catalog
 spec:
@@ -61,7 +61,7 @@ spec:
         provider: stakater
         version: "1.0.0"
         chart: "application-0.0.12"
-        release: "RELEASE-NAME"
+        release: "NAMESPACE_NAME-catalog"
         heritage: "Tiller"
         app: catalog
         

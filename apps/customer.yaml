@@ -10,7 +10,7 @@ metadata:
     provider: stakater
     version: "1.0.0"
     chart: "application-0.0.12"
-    release: "RELEASE-NAME"
+    release: "NAMESPACE_NAME-customer"
     heritage: "Tiller"
   name: customer
 ---
@@ -25,7 +25,7 @@ metadata:
     provider: stakater
     version: "1.0.0"
     chart: "application-0.0.12"
-    release: "RELEASE-NAME"
+    release: "NAMESPACE_NAME-customer"
     heritage: "Tiller"
   name: customer
 spec:
@@ -49,7 +49,7 @@ metadata:
     provider: stakater
     version: "1.0.0"
     chart: "application-0.0.12"
-    release: "RELEASE-NAME"
+    release: "NAMESPACE_NAME-customer"
     heritage: "Tiller"
   name: customer
 spec:
@@ -62,7 +62,7 @@ spec:
         provider: stakater
         version: "1.0.0"
         chart: "application-0.0.12"
-        release: "RELEASE-NAME"
+        release: "NAMESPACE_NAME-customer"
         heritage: "Tiller"
         app: customer
         
