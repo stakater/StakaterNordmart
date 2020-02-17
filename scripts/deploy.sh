@@ -31,10 +31,6 @@ oc adm policy add-scc-to-user anyuid system:serviceaccount:$NAMESPACE_NAME:defau
 #Apply secrets
 oc apply -f secrets/ --namespace=$NAMESPACE_NAME 2>/dev/null
 
-#Install kafka operator
-oc apply -f strimzi-kafka-operator.yaml --namespace=$NAMESPACE_NAME
-oc rollout status deployment strimzi-cluster-operator -n $NAMESPACE_NAME
-
 #Install kafka
 oc apply -f kafka.yaml --namespace=$NAMESPACE_NAME
 oc apply -f apps/catalog.yaml --namespace=$NAMESPACE_NAME
