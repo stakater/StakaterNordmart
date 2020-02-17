@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOMAIN="stakater-200205-1-5c84fa685b23fe4798253ee758d532d0-0000.eu-de.containers.appdomain.cloud"
+DOMAIN="stktrur-200210-1-345785d9ad39a5ed2bf7de019084c0fb-0000.eu-de.containers.appdomain.cloud"
 UNIQUE_STRING=$(head /dev/urandom | tr -dc a-za-z0-9 | head -c 4)
 
 read -p "Enter Namespace name: " NAMESPACE_NAME
