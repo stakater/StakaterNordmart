@@ -83,9 +83,9 @@ spec:
             value: catalog
           - name: CATALOG_API_PORT
             value: "8080"
-          - name: INVENTROY_API_HOST
+          - name: INVENTORY_API_HOST
             value: inventory
-          - name: INVENTROY_API_PORT
+          - name: INVENTORY_API_PORT
             value: "8080"
           - name: DISABLE_CART_DISCOVERY
             value: "false"
