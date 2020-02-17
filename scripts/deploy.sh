@@ -33,7 +33,6 @@ oc apply -f secrets/ --namespace=$NAMESPACE_NAME 2>/dev/null
 
 #Install kafka
 oc apply -f kafka.yaml --namespace=$NAMESPACE_NAME
-oc apply -f apps/catalog.yaml --namespace=$NAMESPACE_NAME
 
 #Apply manifests
 n=0
