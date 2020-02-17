@@ -65,6 +65,7 @@ spec:
         release: "NAMESPACE_NAME-cart"
         heritage: "Tiller"
         app: cart
+        category: backend
         
     spec:
       containers:

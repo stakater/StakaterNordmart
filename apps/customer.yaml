@@ -65,6 +65,7 @@ spec:
         release: "NAMESPACE_NAME-customer"
         heritage: "Tiller"
         app: customer
+        category: backend
         
     spec:
       containers:

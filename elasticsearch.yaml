@@ -28,6 +28,7 @@ spec:
     metadata:
       labels:
         app: elasticsearch
+        category: datasource
     spec:
       containers:
         - image: elasticsearch:7.5.1

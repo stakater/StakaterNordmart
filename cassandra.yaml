@@ -22,6 +22,7 @@ spec:
     metadata:
       labels:
         app: cassandra
+        category: datasource 
     spec:
       containers:
         - name: cassandra

@@ -72,6 +72,7 @@ spec:
         release: "NAMESPACE_NAME-postgresql"
         heritage: "Tiller"
         role: master
+        category: datasource
     spec:
       containers:
         - name: NAMESPACE_NAME-postgresql

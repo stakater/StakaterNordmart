@@ -64,6 +64,7 @@ spec:
         release: "NAMESPACE_NAME-catalog"
         heritage: "Tiller"
         app: catalog
+        category: backend
         
     spec:
       containers:
