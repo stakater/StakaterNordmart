@@ -28,15 +28,23 @@ oc label namespace $NAMESPACE_NAME prometheus=stakater-workload-monitoring
 #Fix permission issue on openshift
 oc adm policy add-scc-to-user anyuid system:serviceaccount:$NAMESPACE_NAME:default
 
-#Apply manifests
+#Apply secrets
 oc apply -f secrets/ --namespace=$NAMESPACE_NAME 2>/dev/null
 
+#Install kafka operator
+oc apply -f strimzi-kafka-operator.yaml --namespace=$NAMESPACE_NAME
+oc rollout status deployment strimzi-cluster-operator -n $NAMESPACE_NAME
+
+#Install kafka
+oc apply -f kafka.yaml --namespace=$NAMESPACE_NAME
+
+#Apply manifests
 n=0
-until [ $n -ge 3 ]
+until [ $n -ge 2 ]
 do
    oc apply -R -f . --namespace=$NAMESPACE_NAME 2>/dev/null && break
    n=$[$n+1]
-   echo "Retrying for $n/3 times..."
+   echo "Retrying for $n/2 times..."
 done
 
 echo "Front-end URL: web-$NAMESPACE_NAME.$DOMAIN"
