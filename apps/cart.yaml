@@ -77,7 +77,7 @@ spec:
           - name: KEYCLOAK_REALM
             value: nordmart
           - name: KEYCLOAK_URL
-            value: https://keycloak-NAMESPACE_NAME.DOMAIN
+            value: https://keycloak-NAMESPACE_NAME.DOMAIN/auth
           - name: KEYCLOAK_CLIENT_BACKEND
             value: stakater-nordmart-backend
           - name: KEYCLOAK_CLIENT_SECRET_KEY
