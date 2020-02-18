@@ -6,6 +6,7 @@ metadata:
     app.kubernetes.io/managed-by: Tiller
     app.kubernetes.io/name: web
     expose: "true"
+    category: route
   name: web
 spec:
   host: web-NAMESPACE_NAME.DOMAIN

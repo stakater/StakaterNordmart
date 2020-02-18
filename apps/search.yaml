@@ -50,6 +50,7 @@ spec:
         release: "RELEASE-NAME"
         heritage: "Tiller"
         app: search
+        category: backend
         
     spec:
       containers:

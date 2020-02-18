@@ -6,6 +6,7 @@ metadata:
     app.kubernetes.io/managed-by: Tiller
     app.kubernetes.io/name: gateway
     expose: "true"
+    category: route
   annotations:
     haproxy.router.openshift.io/timeout: 120s
   name: gateway

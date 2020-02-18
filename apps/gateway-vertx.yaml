@@ -68,6 +68,7 @@ spec:
         release: "NAMESPACE_NAME-gateway"
         heritage: "Tiller"
         app: gateway
+        category: backend
         
     spec:
       containers:

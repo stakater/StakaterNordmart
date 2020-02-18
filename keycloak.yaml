@@ -9,6 +9,7 @@ metadata:
     helm.sh/chart: keycloak-5.1.7
     app.kubernetes.io/instance: NAMESPACE_NAME-keycloak
     app.kubernetes.io/managed-by: Tiller
+    category: configmap
 data:
   keycloak.sh: |
     #!/usr/bin/env bash
@@ -29,6 +30,7 @@ metadata:
     helm.sh/chart: keycloak-5.1.7
     app.kubernetes.io/instance: NAMESPACE_NAME-keycloak
     app.kubernetes.io/managed-by: Tiller
+    category: configmap
 data:
   keycloak.cli: |
     embed-server --std-out=echo
@@ -76,6 +78,7 @@ metadata:
     helm.sh/chart: keycloak-5.1.7
     app.kubernetes.io/instance: NAMESPACE_NAME-keycloak
     app.kubernetes.io/managed-by: Tiller
+    category: configmap
 data:
   test.py: |
     import os
@@ -183,6 +186,7 @@ metadata:
     app.kubernetes.io/instance: NAMESPACE_NAME-keycloak
     app.kubernetes.io/managed-by: Tiller
     role: test
+    category: tool
   annotations:
     "helm.sh/hook": test-success
 spec:
@@ -243,6 +247,7 @@ spec:
       labels:
         app.kubernetes.io/name: keycloak
         app.kubernetes.io/instance: NAMESPACE_NAME-keycloak
+        category: tool
       annotations:
         checksum/config-sh: 583368041190243b2cdf4e216f1896f2af1f99a604a8ce955b2f6e5565fcc645
         checksum/config-startup: 9a25f6b64bf35395cda7f9cc7f8780f511e4e9934c245ac6a14400b72310e58e

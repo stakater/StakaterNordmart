@@ -66,6 +66,7 @@ spec:
         release: "NAMESPACE_NAME-web"
         heritage: "Tiller"
         app: web
+        category: frontend
         
     spec:
       containers:

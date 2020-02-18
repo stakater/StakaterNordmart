@@ -6,6 +6,7 @@ metadata:
     app.kubernetes.io/managed-by: Tiller
     app.kubernetes.io/name: keycloak
     expose: "true"
+    category: route
   name: keycloak
 spec:
   host: keycloak-NAMESPACE_NAME.DOMAIN

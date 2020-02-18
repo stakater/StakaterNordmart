@@ -65,6 +65,7 @@ spec:
         release: "NAMESPACE_NAME-review"
         heritage: "Tiller"
         app: review
+        category: backend
         
     spec:
       containers:
