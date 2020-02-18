@@ -7,6 +7,8 @@ metadata:
     app.kubernetes.io/name: gateway
     expose: "true"
     category: route
+  annotations:
+    haproxy.router.openshift.io/timeout: 120s
   name: gateway
 spec:
   host: gateway-NAMESPACE_NAME.DOMAIN
