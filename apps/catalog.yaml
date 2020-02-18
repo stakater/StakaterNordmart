@@ -69,7 +69,7 @@ spec:
     spec:
       containers:
       - name: catalog
-        image: "stakater/stakater-nordmart-catalog:v0.0.3"
+        image: "stakater/stakater-nordmart-catalog:v0.0.2"
         imagePullPolicy: IfNotPresent
         env:
           - name: MYSQL_USER
