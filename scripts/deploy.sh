@@ -4,7 +4,7 @@ DOMAIN="stktrur-200210-1-345785d9ad39a5ed2bf7de019084c0fb-0000.eu-de.containers.
 UNIQUE_STRING=$(head /dev/urandom | tr -dc a-za-z0-9 | head -c 4)
 
 read -p "Enter Namespace name: " NAMESPACE_NAME
-NAMESPACE_NAME=${NAMESPACE_NAME:${${1}:-nordmart}
+NAMESPACE_NAME=${NAMESPACE_NAME:${${1}:-nordmart}}
 NAMESPACE_NAME="$NAMESPACE_NAME-$UNIQUE_STRING"
 
 echo "Namespace: $NAMESPACE_NAME"
