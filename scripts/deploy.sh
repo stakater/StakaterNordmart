@@ -55,4 +55,4 @@ CATALOG_STATUS=$(curl -X GET -IL https://gateway-$NAMESPACE_NAME.$DOMAIN/api/pro
 echo "Retrieve catalog status: $CATALOG_STATUS"
 
 #Change namespace context
-sudo kubectl config set-context --current --namespace=$NAMESPACE_NAME
+oc project $NAMESPACE_NAME
