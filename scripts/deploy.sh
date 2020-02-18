@@ -47,3 +47,10 @@ done
 
 echo "Front-end URL: web-$NAMESPACE_NAME.$DOMAIN"
 echo "Gateway URL: gateway-$NAMESPACE_NAME.$DOMAIN"
+
+#CURL gateway to retrieve catalog
+CATALOG_STATUS=$(curl -X GET -IL https://gateway-$NAMESPACE_NAME.$DOMAIN/api/products 2>/dev/null | head -n 1 | cut -d ' ' -f2)
+echo "Retrieve catalog status: $CATALOG_STATUS"
+
+#Change namespace context
+sudo kubectl config set-context --current --namespace=$NAMESPACE_NAME
