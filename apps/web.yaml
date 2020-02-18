@@ -71,7 +71,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: "stakater/stakater-nordmart-web:v0.0.6"
+        image: "stakater/stakater-nordmart-web:v0.0.7"
         imagePullPolicy: IfNotPresent
         env:
           - name: PORT
