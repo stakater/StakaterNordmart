@@ -8,7 +8,7 @@ do
    chmod 755 stakater-nordmart-$ITERATION/scripts/deploy.sh
    sed -i '/read -p/d' stakater-nordmart-$ITERATION/scripts/deploy.sh
    cd stakater-nordmart-$ITERATION/
-   make -f Makefile deploy nordmart nordmart-$ITERATION
+   make -f Makefile deploy nordmart-$ITERATION
    echo "Creating nordmart in stakater-nordmart-$ITERATION"
    ITERATION=$[$ITERATION+1]
    cd ..
