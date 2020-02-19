@@ -18,8 +18,8 @@ NAMESPACE_NAME="$NAMESPACE_NAME-$UNIQUE_STRING"
 echo "Namespace: $NAMESPACE_NAME"
 
 #Replace DOMAIN placeholder
-find . -type f -name "*.yaml" -print0 | xargs -0 sed -i -pe "s|DOMAIN|${DOMAIN}|g"
-find . -type f -name "*.json" -print0 | xargs -0 sed -i -pe "s|DOMAIN|${DOMAIN}|g"
+find . -type f -name "*.yaml" -print0 | xargs -0 perl -i -pe "s|DOMAIN|${DOMAIN}|g"
+find . -type f -name "*.json" -print0 | xargs -0 perl -i -pe "s|DOMAIN|${DOMAIN}|g"
 
 #Replace NAMESPACE placeholder
 find . -type f -name "*.yaml" -print0 | xargs -0 perl -i -pe "s|NAMESPACE_NAME|${NAMESPACE_NAME}|g"
