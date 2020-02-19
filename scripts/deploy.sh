@@ -8,7 +8,7 @@ echo "OS NAME: $OS_NAME"
 
 if [[ $OS_NAME == darwin ]]
 then
-  UNIQUE_STRING=asdf
+  UNIQUE_STRING=$(head -c24 < /dev/random | base64 | head -c 4)
 else
   UNIQUE_STRING=$(head /dev/urandom | tr -dc a-za-z0-9 | head -c 4)
 fi
