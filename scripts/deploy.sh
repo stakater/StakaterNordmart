@@ -33,8 +33,8 @@ find . -type f -name "*.json" -print0 | xargs -0 sed -i "s|NAMESPACE_NAME|${NAME
 sed -i "s|NAMESPACE_NAME|${NAMESPACE_NAME}|g" scripts/destroy.sh
 
 #Replace KEYCLOAK_CONFIG
-KEYCLOAK_CONFIG=`cat configs/keycloak.json | base64 -w 0`
-sed -i "s|KEYCLOAK_CONFIG|${KEYCLOAK_CONFIG}|g" secrets/secret-keycloak-config.yaml
+#KEYCLOAK_CONFIG=`cat configs/keycloak.json | base64 -w 0`
+#sed -i "s|KEYCLOAK_CONFIG|${KEYCLOAK_CONFIG}|g" secrets/secret-keycloak-config.yaml
 
 #Create namespace
 oc create namespace $NAMESPACE_NAME
