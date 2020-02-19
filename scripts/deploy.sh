@@ -1,7 +1,18 @@
 #!/bin/bash
 
 DOMAIN="stktrur-200210-1-345785d9ad39a5ed2bf7de019084c0fb-0000.eu-de.containers.appdomain.cloud"
-UNIQUE_STRING=$(head /dev/urandom | tr -dc a-za-z0-9 | head -c 4)
+UNIQUE_STRING=b4mV
+OS_NAME=$(uname -s | tr A-Z a-z)
+
+echo "OS NAME: $OS_NAME"
+
+if [[ $OS_NAME == darwin ]]
+then
+  UNIQUE_STRING=asdf
+else
+  UNIQUE_STRING=$(head /dev/urandom | tr -dc a-za-z0-9 | head -c 4)
+fi
+
 NAMESPACE_NAME_TEMP=${1:-nordmart}
 
 read -p "Enter Namespace name: " NAMESPACE_NAME
