@@ -1,26 +1,8 @@
 #!/bin/bash
 
-DOMAIN="stktrur-200210-1-345785d9ad39a5ed2bf7de019084c0fb-0000.eu-de.containers.appdomain.cloud"
-UNIQUE_STRING=b4mv
-OS_NAME=$(uname -s | tr A-Z a-z)
-
-echo "OS NAME: $OS_NAME"
-
-if [[ $OS_NAME == darwin ]]
-then
-  #UNIQUE_STRING=$(head -c24 < /dev/random | base64 | head -c 4)
-  UNIQUE_STRING=$(cat /dev/urandom | base64 | tr -dc 'a-z' | head -c4)
-else
-  UNIQUE_STRING=$(head /dev/urandom | tr -dc a-za-z0-9 | head -c 4)
-fi
-
-NAMESPACE_NAME_TEMP=${1:-nordmart}
+DOMAIN="nordmart.stakater.com"
 
 read -p "Enter Namespace name: " NAMESPACE_NAME
-
-NAMESPACE_NAME=${NAMESPACE_NAME:-NAMESPACE_NAME_TEMP}
-NAMESPACE_NAME=${NAMESPACE_NAME:0:8}
-NAMESPACE_NAME="$NAMESPACE_NAME-$UNIQUE_STRING"
 
 echo "Namespace: $NAMESPACE_NAME"
 
@@ -33,9 +15,6 @@ find . -type f -name "*.yaml" -print0 | xargs -0 perl -i -pe "s|NAMESPACE_NAME|$
 find . -type f -name "*.json" -print0 | xargs -0 perl -i -pe "s|NAMESPACE_NAME|${NAMESPACE_NAME}|g"
 perl -i -pe "s|NAMESPACE_NAME|${NAMESPACE_NAME}|g" scripts/destroy.sh
 
-#Replace KEYCLOAK_CONFIG
-#KEYCLOAK_CONFIG=`cat configs/keycloak.json | base64 -w 0`
-#sed -i "s|KEYCLOAK_CONFIG|${KEYCLOAK_CONFIG}|g" secrets/secret-keycloak-config.yaml
 
 #Create namespace
 oc create namespace $NAMESPACE_NAME
