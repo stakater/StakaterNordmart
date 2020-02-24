@@ -9,7 +9,7 @@ metadata:
     group: com.stakater.platform
     provider: stakater
     version: "1.0.0"
-    chart: "application-0.0.12"
+    chart: "application-0.0.13"
     release: "NAMESPACE_NAME-catalog"
     heritage: "Tiller"
   name: catalog
@@ -24,7 +24,7 @@ metadata:
     group: com.stakater.platform
     provider: stakater
     version: "1.0.0"
-    chart: "application-0.0.12"
+    chart: "application-0.0.13"
     release: "NAMESPACE_NAME-catalog"
     heritage: "Tiller"
   name: catalog
@@ -47,7 +47,7 @@ metadata:
     group: com.stakater.platform
     provider: stakater
     version: "1.0.0"
-    chart: "application-0.0.12"
+    chart: "application-0.0.13"
     release: "NAMESPACE_NAME-catalog"
     heritage: "Tiller"
   name: catalog
@@ -60,16 +60,15 @@ spec:
         group: com.stakater.platform
         provider: stakater
         version: "1.0.0"
-        chart: "application-0.0.12"
+        chart: "application-0.0.13"
         release: "NAMESPACE_NAME-catalog"
         heritage: "Tiller"
         app: catalog
-        category: backend
         
     spec:
       containers:
       - name: catalog
-        image: "stakater/stakater-nordmart-catalog:v0.0.2"
+        image: "stakater/stakater-nordmart-catalog:v0.0.3"
         imagePullPolicy: IfNotPresent
         env:
           - name: MYSQL_USER
@@ -89,7 +88,7 @@ spec:
           - name: KEYCLOAK_REALM
             value: nordmart
           - name: KEYCLOAK_URL
-            value: https://keycloak-NAMESPACE_NAME.DOMAIN/auth
+            value: https://keycloak-NAMESPACE.DOMAIN/auth/
           - name: KEYCLOAK_CLIENT_BACKEND
             value: stakater-nordmart-backend
           - name: KEYCLOAK_CLIENT_SECRET_KEY
