@@ -51,6 +51,8 @@ metadata:
     chart: "application-0.0.13"
     release: "NAMESPACE_NAME-review"
     heritage: "Tiller"
+    appCategory: backend
+    
   name: review
 spec:
   replicas: 1
