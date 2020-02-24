@@ -9,7 +9,7 @@ metadata:
     group: com.stakater.platform
     provider: stakater
     version: "1.0.0"
-    chart: "application-0.0.12"
+    chart: "application-0.0.13"
     release: "NAMESPACE_NAME-review"
     heritage: "Tiller"
   name: review
@@ -24,7 +24,7 @@ metadata:
     group: com.stakater.platform
     provider: stakater
     version: "1.0.0"
-    chart: "application-0.0.12"
+    chart: "application-0.0.13"
     release: "NAMESPACE_NAME-review"
     heritage: "Tiller"
   name: review
@@ -48,7 +48,7 @@ metadata:
     group: com.stakater.platform
     provider: stakater
     version: "1.0.0"
-    chart: "application-0.0.12"
+    chart: "application-0.0.13"
     release: "NAMESPACE_NAME-review"
     heritage: "Tiller"
   name: review
@@ -61,11 +61,10 @@ spec:
         group: com.stakater.platform
         provider: stakater
         version: "1.0.0"
-        chart: "application-0.0.12"
+        chart: "application-0.0.13"
         release: "NAMESPACE_NAME-review"
         heritage: "Tiller"
         app: review
-        category: backend
         
     spec:
       containers:
