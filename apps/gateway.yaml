@@ -51,6 +51,8 @@ metadata:
     chart: "application-0.0.13"
     release: "NAMESPACE_NAME-gateway"
     heritage: "Tiller"
+    appCategory: backend
+    
   name: gateway
 spec:
   replicas: 1
