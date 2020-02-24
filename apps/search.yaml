@@ -36,6 +36,8 @@ metadata:
     chart: "application-0.0.13"
     release: "NAMESPACE_NAME-search"
     heritage: "Tiller"
+    appCategory: backend
+    
   name: search
 spec:
   replicas: 1
