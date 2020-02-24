@@ -9,8 +9,8 @@ metadata:
     group: com.stakater.platform
     provider: stakater
     version: "1.0.0"
-    chart: "application-0.0.12"
-    release: "NAMESPACE_NAME-gateway"
+    chart: "application-0.0.13"
+    release: "NAMESPACE_NAME-gateway-vertx"
     heritage: "Tiller"
   name: gateway
 ---
@@ -24,8 +24,8 @@ metadata:
     group: com.stakater.platform
     provider: stakater
     version: "1.0.0"
-    chart: "application-0.0.12"
-    release: "NAMESPACE_NAME-gateway"
+    chart: "application-0.0.13"
+    release: "NAMESPACE_NAME-gateway-vertx"
     heritage: "Tiller"
   name: gateway
 spec:
@@ -48,8 +48,8 @@ metadata:
     group: com.stakater.platform
     provider: stakater
     version: "1.0.0"
-    chart: "application-0.0.12"
-    release: "NAMESPACE_NAME-gateway"
+    chart: "application-0.0.13"
+    release: "NAMESPACE_NAME-gateway-vertx"
     heritage: "Tiller"
   annotations:
     reloader.stakater.com/auto: "true"
@@ -64,11 +64,10 @@ spec:
         group: com.stakater.platform
         provider: stakater
         version: "1.0.0"
-        chart: "application-0.0.12"
-        release: "NAMESPACE_NAME-gateway"
+        chart: "application-0.0.13"
+        release: "NAMESPACE_NAME-gateway-vertx"
         heritage: "Tiller"
         app: gateway
-        category: backend
         
     spec:
       containers:
@@ -124,10 +123,7 @@ spec:
           successThreshold: 1
           timeoutSeconds: 1
         
-      serviceAccountName: default
----
-# Source: application/templates/ingress.yaml
-
+      serviceAccountName: gateway        
 ---
 # Source: application/templates/clusterrole.yaml
 
@@ -136,6 +132,9 @@ spec:
 
 ---
 # Source: application/templates/configmap.yaml
+
+---
+# Source: application/templates/ingress.yaml
 
 ---
 # Source: application/templates/pvc.yaml
