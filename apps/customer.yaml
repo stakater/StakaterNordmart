@@ -51,6 +51,8 @@ metadata:
     chart: "application-0.0.13"
     release: "NAMESPACE_NAME-customer"
     heritage: "Tiller"
+    appCategory: backend
+    
   name: customer
 spec:
   replicas: 1
