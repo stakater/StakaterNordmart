@@ -9,7 +9,7 @@ metadata:
     group: com.stakater.platform
     provider: stakater
     version: "1.0.0"
-    chart: "application-0.0.12"
+    chart: "application-0.0.13"
     release: "NAMESPACE_NAME-customer"
     heritage: "Tiller"
   name: customer
@@ -24,7 +24,7 @@ metadata:
     group: com.stakater.platform
     provider: stakater
     version: "1.0.0"
-    chart: "application-0.0.12"
+    chart: "application-0.0.13"
     release: "NAMESPACE_NAME-customer"
     heritage: "Tiller"
   name: customer
@@ -48,7 +48,7 @@ metadata:
     group: com.stakater.platform
     provider: stakater
     version: "1.0.0"
-    chart: "application-0.0.12"
+    chart: "application-0.0.13"
     release: "NAMESPACE_NAME-customer"
     heritage: "Tiller"
   name: customer
@@ -61,11 +61,10 @@ spec:
         group: com.stakater.platform
         provider: stakater
         version: "1.0.0"
-        chart: "application-0.0.12"
+        chart: "application-0.0.13"
         release: "NAMESPACE_NAME-customer"
         heritage: "Tiller"
         app: customer
-        category: backend
         
     spec:
       containers:
@@ -80,7 +79,7 @@ spec:
           - name: KEYCLOAK_REALM
             value: nordmart
           - name: KEYCLOAK_URL
-            value: https://keycloak-NAMESPACE_NAME.DOMAIN/auth
+            value: https://keycloak-NAMESPACE.DOMAIN/auth/
           - name: KEYCLOAK_CLIENT_BACKEND
             value: stakater-nordmart-backend
           - name: KEYCLOAK_CLIENT_SECRET_KEY
