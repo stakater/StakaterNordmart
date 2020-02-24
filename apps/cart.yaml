@@ -51,6 +51,8 @@ metadata:
     chart: "application-0.0.13"
     release: "NAMESPACE_NAME-cart"
     heritage: "Tiller"
+    appCategory: backend
+    
   name: cart
 spec:
   replicas: 1
