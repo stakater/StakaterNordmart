@@ -9,7 +9,7 @@ metadata:
     group: com.stakater.platform
     provider: stakater
     version: "1.0.0"
-    chart: "application-0.0.12"
+    chart: "application-0.0.13"
     release: "NAMESPACE_NAME-search"
     heritage: "Tiller"
   name: search
@@ -33,8 +33,8 @@ metadata:
     group: com.stakater.platform
     provider: stakater
     version: "1.0.0"
-    chart: "application-0.0.12"
-    release: "RELEASE-NAME"
+    chart: "application-0.0.13"
+    release: "NAMESPACE_NAME-search"
     heritage: "Tiller"
   name: search
 spec:
@@ -46,11 +46,10 @@ spec:
         group: com.stakater.platform
         provider: stakater
         version: "1.0.0"
-        chart: "application-0.0.12"
-        release: "RELEASE-NAME"
+        chart: "application-0.0.13"
+        release: "NAMESPACE_NAME-search"
         heritage: "Tiller"
         app: search
-        category: backend
         
     spec:
       containers:
