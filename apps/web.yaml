@@ -9,7 +9,7 @@ metadata:
     group: com.stakater.platform
     provider: stakater
     version: "1.0.0"
-    chart: "application-0.0.12"
+    chart: "application-0.0.13"
     release: "NAMESPACE_NAME-web"
     heritage: "Tiller"
   name: web
@@ -24,7 +24,7 @@ metadata:
     group: com.stakater.platform
     provider: stakater
     version: "1.0.0"
-    chart: "application-0.0.12"
+    chart: "application-0.0.13"
     release: "NAMESPACE_NAME-web"
     heritage: "Tiller"
   name: web
@@ -49,9 +49,11 @@ metadata:
     group: com.stakater.platform
     provider: stakater
     version: "1.0.0"
-    chart: "application-0.0.12"
+    chart: "application-0.0.13"
     release: "NAMESPACE_NAME-web"
     heritage: "Tiller"
+    appCategory: frontend
+    
   name: web
 spec:
   replicas: 1
@@ -62,11 +64,10 @@ spec:
         group: com.stakater.platform
         provider: stakater
         version: "1.0.0"
-        chart: "application-0.0.12"
+        chart: "application-0.0.13"
         release: "NAMESPACE_NAME-web"
         heritage: "Tiller"
         app: web
-        category: frontend
         
     spec:
       containers:
@@ -77,9 +78,9 @@ spec:
           - name: PORT
             value: "4200"
           - name: SECURE_GW_ENDPOINT
-            value: https://gateway-NAMESPACE_NAME.DOMAIN
+            value: https://gateway-NAMESPACE.DOMAIN
           - name: SSO_URL
-            value: https://keycloak-NAMESPACE_NAME.DOMAIN/auth
+            value: https://keycloak-NAMESPACE.DOMAIN/auth
           - name: SSO_REALM
             value: nordmart
           - name: SSO_CLIENT_ID
@@ -108,9 +109,6 @@ spec:
         
       serviceAccountName: web        
 ---
-# Source: application/templates/ingress.yaml
-
----
 # Source: application/templates/clusterrole.yaml
 
 ---
@@ -118,6 +116,9 @@ spec:
 
 ---
 # Source: application/templates/configmap.yaml
+
+---
+# Source: application/templates/ingress.yaml
 
 ---
 # Source: application/templates/pvc.yaml
