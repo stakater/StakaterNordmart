@@ -1,0 +1,17 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineRun
+metadata:
+  generateName: pipeline-inventory-pr-
+spec:
+  pipelineRef:
+    name: pipeline-inventory
+  resources:
+    - name: git-source
+      resourceRef:
+        name: picalc-git
+  params:
+    - name: imageUrl
+      value: <REGISTRY>/<NAMESPACE>/picalc
+    - name: imageTag
+      value: "1.0"
+  serviceAccountName: pipeline-account
