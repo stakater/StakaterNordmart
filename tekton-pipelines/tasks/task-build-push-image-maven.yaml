@@ -1,0 +1,81 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: task-build-deploy-maven
+  namespace: tekton-pipelines
+spec:
+  inputs:
+    resources:
+      - name: source
+        type: git
+    params:
+      # TaskRun/PipelineRun is used to override override the default parameter values
+      - name: contextDir
+        description: The location of the path to run s2i from.
+        default: .
+      - name: tlsVerify
+        description: Verify the TLS on the registry endpoint
+        default: "true"
+      - name: destinationImageName
+        description: The destination image name that will be pushed to container registry
+        default: "${outputs.resources.image.url}"
+      - name: mavenMirrorUrl
+        description: The Maven Mirror to use
+        default: 'https://repo1.maven.org/maven2'
+      - name: dockerfilePath
+        description: The native build docker file path relative to the contextDir
+        default: src/main/docker/Dockerfile.jvm
+  outputs:
+    resources:
+      - name: image
+        type: image
+  steps:
+    - name: build-jar
+      image: quay.io/rhdevelopers/quarkus-java-builder:graal-19.0.2
+      imagePullPolicy: Always
+      env:
+        - name: MAVEN_MIRROR_URL
+          value: "${inputs.params.mavenMirrorUrl}"
+        - name: TLSVERIFY
+          value: "${inputs.params.tlsVerify}"
+        - name: WORK_DIR
+          value: /workspace/source/${inputs.params.contextDir}
+        - name: MVN_CMD_ARGS
+          value: "clean package"
+      args: ["/usr/local/bin/maven-run.sh"]
+      securityContext:
+        privileged: true
+      resources:
+        limits:
+          memory: 3Gi
+          cpu: 2
+        requests:
+          memory: 3Gi
+          cpu: 2
+    - name: build-image
+      image: quay.io/buildah/stable
+      workingdir: /workspace/source/${inputs.params.contextDir}
+      command: ['buildah', 'bud', '--tls-verify=${inputs.params.tlsVerify}', '--layers','-f', '/workspace/source/${inputs.params.contextDir}/${inputs.params.dockerfilePath}', '-t', '${inputs.params.destinationImageName}', '.']
+      volumeMounts:
+        - name: varlibcontainers
+          mountPath: /var/lib/containers
+      securityContext:
+        privileged: true
+      resources:
+        limits:
+          memory: 6Gi
+          cpu: 4
+        requests:
+          memory: 4Gi
+          cpu: 2
+    - name: push-image
+      image: quay.io/buildah/stable
+      command: ['buildah', 'push', '--tls-verify=${inputs.params.tlsVerify}', '${inputs.params.destinationImageName}', 'docker://${inputs.params.destinationImageName}']
+      volumeMounts:
+        - name: varlibcontainers
+          mountPath: /var/lib/containers
+      securityContext:
+        privileged: true
+  volumes:
+    - name: varlibcontainers
+      emptyDir: {}

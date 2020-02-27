@@ -1,0 +1,33 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Pipeline
+metadata:
+  name: pipeline-maven
+  namespace: tekton-pipelines
+spec:
+  resources:
+    - name: app-git
+      type: git
+    - name: app-image
+      type: image
+  params:
+    - name: applicationSrcDir
+      description: The source directory of the application within the source repository
+      default: .
+  tasks:
+    - name: build
+      taskRef:
+        name: task-build-deploy-maven
+      params:
+        - name: contextDir
+          value: "$(params.applicationSrcDir)"
+        - name: mavenMirrorUrl
+          value: "http://nexus.rhd-workshop-infra:8081/nexus/content/groups/public"
+        - name: dockerFile
+          value: "Dockerfile"
+      resources:
+        inputs:
+          - name: source
+            resource: app-git
+        outputs:
+          - name: builtImage
+            resource: app-image
