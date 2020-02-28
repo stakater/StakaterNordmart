@@ -1,0 +1,23 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: build-simple
+  namespace: tekton-pipelines
+spec:
+  steps:
+    - name: build-simple
+      image: docker.io/library/busybox
+      command:
+        - /bin/sh
+      args:
+        - -c
+        - "echo hello world"
+---
+apiVersion: tekton.dev/v1alpha1
+kind: TaskRun
+metadata:
+  name: build-simple
+  namespace: tekton-pipelines
+spec:
+  taskRef:
+    name: build-simple
