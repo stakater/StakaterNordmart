@@ -80,7 +80,7 @@ spec:
             value: inventory
           - name: POSTGRESQL_PASSWORD
             valueFrom:
-              configMapKeyRef:
+              secretKeyRef:
                 key: POSTGRESQL_PASSWORD
                 name: inventory-postgresql-secret
           
