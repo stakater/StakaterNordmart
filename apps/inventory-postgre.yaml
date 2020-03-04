@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: postgres
+    category: service
+  name: stakater-nordmart-inventory-postgresql-svc
+spec:
+  ports:
+    - name: "postgres-port"
+      port: 5432
+      targetPort: 5432
+  selector:
+    app: postgres
+...
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: stakater-nordmart-inventory-postgresql
+spec:
+  serviceName: "postgres"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+        category: datasource
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:9.6.16
+          envFrom:
+            - configMapRef:
+                name: inventory-postgresql-config
+          ports:
+            - containerPort: 5432
+              name: postgredb
+          volumeMounts:
+            - name: postgredb
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres
+  volumeClaimTemplates:
+    - metadata:
+        name: postgredb
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: ibmc-block-gold
+        resources:
+          requests:
+            storage: 1Gi
