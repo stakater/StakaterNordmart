@@ -51,11 +51,13 @@ spec:
               # This is a PR
               gitrevision=$(inputs.params.gitrevision)
               imageTag="SNAPSHOT-PR-$(inputs.params.prnumber)-${gitrevision:(-4)}"
-          elif [ $(inputs.params.prnumber) != "NA" ] && [ $(git rev-parse --abbrev-ref HEAD) == "master" ]; then
+          elif [ $(inputs.params.prnumber) == "NA" ] && [ $(git rev-parse --abbrev-ref HEAD) == "master" ]; then
               # Commit pushed on master branch
               # Retrieve current tag
               git pull --tags >/dev/null 2>&1
-              VERSION=`git describe --abbrev=0 --tags origin/master`
+              # ERROR: fatal: No tags can describe '<revision-sha>'. when using `git describe --abbrev=0 --tags`
+              #Working alternative = (git describe --tags $(git rev-list --tags --max-count=1))
+              VERSION=$(git tag --sort=taggerdate | tail -1)
               echo "Current tag for master: $VERSION"
 
               # Split version and increment path by 1
@@ -105,10 +107,10 @@ spec:
       image: quay.io/buildah/stable
       command: ["/bin/bash"]
       args:
-      - -c
-      - |
-        export IMAGE_TAG=$(cat /workspace/source/GIT_TAG)
-        buildah --storage-driver=vfs push --tls-verify=$(inputs.params.tlsVerify) $(inputs.params.destinationImageName):$IMAGE_TAG docker://$(inputs.params.destinationImageName):$IMAGE_TAG
+        - -c
+        - |
+          export IMAGE_TAG=$(cat /workspace/source/GIT_TAG)
+          buildah --storage-driver=vfs push --tls-verify=$(inputs.params.tlsVerify) $(inputs.params.destinationImageName):$IMAGE_TAG docker://$(inputs.params.destinationImageName):$IMAGE_TAG
       volumeMounts:
         - name: varlibcontainers
           mountPath: /var/lib/containers
@@ -140,7 +142,7 @@ spec:
         - -c
         - |
           echo "TOKEN: $GIT_PASSWORD USERNAME: $GIT_USERNAME EMAIL: $GIT_EMAIL"
-          if [ $(inputs.params.prnumber) != "NA" ] && [ $(git rev-parse --abbrev-ref HEAD) == "master" ]; then
+          if [ $(inputs.params.prnumber) == "NA" ] && [ $(git rev-parse --abbrev-ref HEAD) == "master" ]; then
               export IMAGE_TAG=$(cat /workspace/source/GIT_TAG)
               git config --global user.name $GIT_USERNAME
               git config --global user.email $GIT_EMAIL
@@ -168,7 +170,7 @@ spec:
           #Remove baseurl
           REPO_NAME=${REPO_NAME#*/}
           curl -s -H "Authorization: token ${GITHUBTOKEN}" \
-          -X POST -d '{"body": "Tekton - Pipeline ran successfully and image $(inputs.params.destinationImageName):$IMAGE_TAG is available"}' \
+          -X POST -d '{"body": "Tekton - Pipeline ran successfully and image $(inputs.params.destinationImageName):$(IMAGE_TAG) is available"}' \
           "https://api.github.com/repos/${REPO_NAME}/issues/$(inputs.params.prnumber)/comments"
   volumes:
     - name: varlibcontainers
