@@ -78,9 +78,9 @@ spec:
           - name: PORT
             value: "4200"
           - name: SECURE_GW_ENDPOINT
-            value: https://gateway-NAMESPACE.DOMAIN
+            value: https://gateway-NAMESPACE_NAME.DOMAIN
           - name: SSO_URL
-            value: https://keycloak-NAMESPACE.DOMAIN/auth
+            value: https://keycloak-NAMESPACE_NAME.DOMAIN/auth
           - name: SSO_REALM
             value: nordmart
           - name: SSO_CLIENT_ID
