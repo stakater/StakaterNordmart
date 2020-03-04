@@ -1,19 +1,4 @@
 ---
-# Source: application/templates/serviceaccount.yaml
-
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  labels:
-    app: gateway
-    group: com.stakater.platform
-    provider: stakater
-    version: "1.0.0"
-    chart: "application-0.0.13"
-    release: "NAMESPACE_NAME-gateway"
-    heritage: "Tiller"
-  name: gateway
----
 # Source: application/templates/service.yaml
 
 apiVersion: v1
@@ -124,7 +109,7 @@ spec:
           successThreshold: 1
           timeoutSeconds: 1
         
-      serviceAccountName: gateway        
+      serviceAccountName: default        
 ---
 # Source: application/templates/clusterrole.yaml
 
@@ -151,4 +136,7 @@ spec:
 
 ---
 # Source: application/templates/secret.yaml
+
+---
+# Source: application/templates/serviceaccount.yaml
 
