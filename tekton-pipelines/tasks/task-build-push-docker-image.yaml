@@ -141,7 +141,6 @@ spec:
       args:
         - -c
         - |
-          echo "TOKEN: $GIT_PASSWORD USERNAME: $GIT_USERNAME EMAIL: $GIT_EMAIL"
           if [ $(inputs.params.prnumber) == "NA" ] && [ $(git rev-parse --abbrev-ref HEAD) == "master" ]; then
               export IMAGE_TAG=$(cat /workspace/source/GIT_TAG)
               git config --global user.name $GIT_USERNAME
