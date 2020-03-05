@@ -38,7 +38,7 @@ spec:
         memory: 2Gi
   steps:
     - name: create-tag-file
-      image: ahmedwaleedmalik/alpine-git
+      image: stakater/alpine-git
       command: ["/bin/bash"]
       workingdir: /workspace/source/
       args:
@@ -118,7 +118,7 @@ spec:
         runAsUser: 0
         privileged: true
     - name: push-master-tags
-      image: ahmedwaleedmalik/alpine-git
+      image: stakater/alpine-git
       command: ["/bin/bash"]
       workingdir: /workspace/source/
       env:
@@ -155,7 +155,7 @@ spec:
             secretKeyRef:
               name: stakater-git-auth
               key: password
-      image: ahmedwaleedmalik/alpine-git
+      image: stakater/alpine-git
       command: ["/bin/bash"]
       workingdir: /workspace/source/
       args:
