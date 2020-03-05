@@ -2,7 +2,6 @@ apiVersion: tekton.dev/v1alpha1
 kind: TriggerTemplate
 metadata:
   name: inventory-triggertemplate
-  namespace: tekton-pipelines
 spec:
   params:
     - name: gitrevision
@@ -64,7 +63,6 @@ apiVersion: tekton.dev/v1alpha1
 kind: TriggerBinding
 metadata:
   name: inventory-triggerbinding-push
-  namespace: tekton-pipelines
 spec:
   params:
     - name: gitrevision
@@ -72,7 +70,7 @@ spec:
     - name: prnumber
       value: NA
     - name: namespace
-      value: tekton-pipelines
+      value: NAMESPACE_NAME
     - name: gitrepositoryurl
       value: "https://github.com/$(body.repository.full_name)"
     - name: image_registry_url
@@ -82,7 +80,6 @@ apiVersion: tekton.dev/v1alpha1
 kind: TriggerBinding
 metadata:
   name: inventory-triggerbinding-pullrequest
-  namespace: tekton-pipelines
 spec:
   params:
     - name: gitrevision
@@ -90,7 +87,7 @@ spec:
     - name: prnumber
       value: $(body.pull_request.number)
     - name: namespace
-      value: tekton-pipelines
+      value: NAMESPACE_NAME
     - name: gitrepositoryurl
       value: "https://github.com/$(body.repository.full_name)"
     - name: image_registry_url
@@ -100,7 +97,6 @@ apiVersion: tekton.dev/v1alpha1
 kind: EventListener
 metadata:
   name: inventory-eventlistener
-  namespace: tekton-pipelines
 spec:
   serviceAccountName: stakater-tekton-builder
   triggers:
@@ -130,7 +126,6 @@ apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
   name: stakater-nordmart-inventory-eventlistener
-  namespace: tekton-pipelines
 spec:
   port:
     targetPort: 8080

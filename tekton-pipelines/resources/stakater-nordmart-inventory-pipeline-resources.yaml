@@ -3,7 +3,6 @@ apiVersion: tekton.dev/v1alpha1
 kind: PipelineResource
 metadata:
   name: stakater-nordmart-inventory-git-source
-  namespace: tekton-pipelines
 spec:
   type: git
   params:
@@ -16,7 +15,6 @@ apiVersion: tekton.dev/v1alpha1
 kind: PipelineResource
 metadata:
   name: stakater-nordmart-inventory-image
-  namespace: tekton-pipelines
 spec:
   type: image
   params:

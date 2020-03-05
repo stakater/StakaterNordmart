@@ -4,7 +4,6 @@ metadata:
   # `generateName` will use the value as a prefix and generate unique name adding a random suffix at runtime
   generateName: inventory-pipeline-
   name: inventory-pipeline
-  namespace: tekton-pipelines
 spec:
   pipelineRef:
     name: pipeline-maven

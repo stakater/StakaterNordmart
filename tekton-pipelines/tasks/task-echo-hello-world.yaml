@@ -2,7 +2,6 @@ apiVersion: tekton.dev/v1alpha1
 kind: Task
 metadata:
   name: task-echo-hello-world
-  namespace: tekton-pipelines
 spec:
   steps:
     - name: build-simple

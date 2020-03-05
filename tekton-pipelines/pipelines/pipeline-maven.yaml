@@ -2,7 +2,6 @@ apiVersion: tekton.dev/v1alpha1
 kind: Pipeline
 metadata:
   name: pipeline-maven
-  namespace: tekton-pipelines
 spec:
   params:
   - name: prnumber
