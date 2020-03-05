@@ -1,7 +1,8 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Task
 metadata:
-  name: task-echo-hello-world
+  name: task-echo-status
+  namespace: tekton-pipelines
 spec:
   steps:
     - name: build-simple
@@ -10,4 +11,4 @@ spec:
         - /bin/sh
       args:
         - -c
-        - "echo hello world"
+        - "echo Running pipeline"
