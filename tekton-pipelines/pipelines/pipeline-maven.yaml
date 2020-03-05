@@ -4,26 +4,31 @@ metadata:
   name: pipeline-maven
 spec:
   params:
-  - name: prnumber
-    type: string
-    description: In case of PR, PR number that is to be used in image tag. If this field is empty it means that it's a commit on master branch
-    default: NA
+    - name: prnumber
+      type: string
+      description: In case of PR, PR number that is to be used in image tag. If this field is empty it means that it's a commit on master branch
+      default: NA
   resources:
     - name: app-git
       type: git
     - name: app-image
       type: image
   tasks:
-    - name: echo-hello-world
+    - name: echo-pipeline-status
       taskRef:
-        name: task-echo-hello-world
+        name: task-echo-status
+      conditions:
+        - conditionRef: condition-check-prnumber-not-empty
+          params:
+            - name: prnumber
+              value: $(params.prnumber)
     - name: build-push-docker-image
       taskRef:
         name: task-build-push-docker-image
       # By default pipeline tasks run in parallel. In case if sequential execution is required one can use `runAfter`
       # to add dependant tasks
       runAfter:
-        - echo-hello-world
+        - echo-pipeline-status
       params:
         - name: dockerFilePath
           value: "Dockerfile"

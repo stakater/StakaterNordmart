@@ -168,7 +168,7 @@ spec:
           #Remove baseurl
           REPO_NAME=${REPO_NAME#*/}
           curl -s -H "Authorization: token ${GITHUBTOKEN}" \
-          -X POST -d '{"body": "Tekton - Pipeline ran successfully and image $(inputs.params.destinationImageName):'$IMAGE_TAG' is available"}' \
+          -X POST -d '{"body": "Tekton - Pipeline ran successfully and image $(inputs.params.destinationImageName):$(IMAGE_TAG) is available"}' \
           "https://api.github.com/repos/${REPO_NAME}/issues/$(inputs.params.prnumber)/comments"
   volumes:
     - name: varlibcontainers
