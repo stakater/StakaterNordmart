@@ -9,7 +9,7 @@ spec:
     - name: revision
       value: master
     - name: url
-      value: https://github.com/stakater-lab/stakater-nordmart-inventory
+      value: https://github.com/<USERNAME>/stakater-nordmart-inventory
 ---
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineResource
