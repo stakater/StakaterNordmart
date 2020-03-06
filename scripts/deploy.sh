@@ -17,23 +17,23 @@ perl -i -pe "s|NAMESPACE_NAME|${NAMESPACE_NAME}|g" scripts/destroy.sh
 
 
 #Create namespace
-oc create namespace $NAMESPACE_NAME
-oc label namespace $NAMESPACE_NAME prometheus=stakater-workload-monitoring
+kubectl create namespace $NAMESPACE_NAME
+kubectl label namespace $NAMESPACE_NAME prometheus=stakater-workload-monitoring
 
 #Fix permission issue on openshift
 oc adm policy add-scc-to-user anyuid system:serviceaccount:$NAMESPACE_NAME:default
 
 #Apply secrets
-oc apply -f secrets/ --namespace=$NAMESPACE_NAME 2>/dev/null
+kubectl apply -f secrets/ --namespace=$NAMESPACE_NAME 2>/dev/null
 
 #Install kafka
-oc apply -f kafka.yaml --namespace=$NAMESPACE_NAME
+kubectl apply -f kafka.yaml --namespace=$NAMESPACE_NAME
 
 #Apply manifests
 n=0
 until [ $n -ge 2 ]
 do
-   oc apply -R -f . --namespace=$NAMESPACE_NAME 2>/dev/null && break
+   kubectl apply -R -f . --namespace=$NAMESPACE_NAME 2>/dev/null && break
    n=$[$n+1]
    echo "Retrying for $n/2 times..."
 done
