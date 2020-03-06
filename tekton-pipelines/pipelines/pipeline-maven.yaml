@@ -25,6 +25,8 @@ spec:
     - name: build-push-docker-image
       taskRef:
         name: task-build-push-docker-image
+      Timeout: "0h5m30s"
+      retries: 1
       # By default pipeline tasks run in parallel. In case if sequential execution is required one can use `runAfter`
       # to add dependant tasks
       runAfter:
