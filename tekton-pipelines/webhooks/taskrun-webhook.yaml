@@ -8,9 +8,9 @@ spec:
   inputs:
     params:
       - name: GitHubOrg
-        value: "stakater-lab"
+        value: "USERNAME"
       - name: GitHubUser
-        value: "stakater-user"
+        value: "USERNAME"
       - name: GitHubRepo
         value: "stakater-nordmart-inventory"
       - name: GitHubSecretName
