@@ -7,6 +7,7 @@ metadata:
 spec:
   pipelineRef:
     name: pipeline-maven
+  timeout: "0h5m30s"
   serviceAccountName: "stakater-tekton-builder"
   resources:
     - name: app-git
