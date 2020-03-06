@@ -1,10 +1,10 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Task
 metadata:
-  name: build-simple
+  name: task-hello-world
 spec:
   steps:
-    - name: build-simple
+    - name: echo-hello-world
       image: docker.io/library/busybox
       command:
         - /bin/sh
@@ -15,7 +15,7 @@ spec:
 apiVersion: tekton.dev/v1alpha1
 kind: TaskRun
 metadata:
-  name: build-simple
+  name: taskrun-hello-world
 spec:
   taskRef:
-    name: build-simple
+    name: task-hello-world
