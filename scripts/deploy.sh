@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOMAIN="nordmart.stakater.com"
+DOMAIN="roks433fk-345785d9ad39a5ed2bf7de019084c0fb-0000.eu-de.containers.appdomain.cloud"
 
 read -p "Enter Namespace name: " NAMESPACE_NAME
 
