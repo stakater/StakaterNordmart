@@ -52,7 +52,7 @@ metadata:
     chart: "application-0.0.13"
     release: "NAMESPACE_NAME-web"
     heritage: "Tiller"
-    appCategory: frontend
+    category: frontend
     
   name: web
 spec:
@@ -67,8 +67,7 @@ spec:
         chart: "application-0.0.13"
         release: "NAMESPACE_NAME-web"
         heritage: "Tiller"
-        app: web
-        
+        category: frontend
     spec:
       containers:
       - name: web
