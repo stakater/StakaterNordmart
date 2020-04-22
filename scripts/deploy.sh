@@ -4,6 +4,8 @@ DOMAIN="roks433fk-345785d9ad39a5ed2bf7de019084c0fb-0000.eu-de.containers.appdoma
 
 read -p "Enter Namespace name: " NAMESPACE_NAME
 
+NAMESPACE_NAME="$(echo ${NAMESPACE_NAME} | cut -c 1-15)"
+
 echo "Namespace: $NAMESPACE_NAME"
 
 #Replace DOMAIN placeholder

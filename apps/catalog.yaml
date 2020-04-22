@@ -50,6 +50,7 @@ metadata:
     chart: "application-0.0.13"
     release: "NAMESPACE_NAME-catalog"
     heritage: "Tiller"
+    category: backend
   name: catalog
 spec:
   replicas: 1
@@ -63,7 +64,7 @@ spec:
         chart: "application-0.0.13"
         release: "NAMESPACE_NAME-catalog"
         heritage: "Tiller"
-        app: catalog
+        category: backend
         
     spec:
       containers:

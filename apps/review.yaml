@@ -51,7 +51,7 @@ metadata:
     chart: "application-0.0.13"
     release: "NAMESPACE_NAME-review"
     heritage: "Tiller"
-    appCategory: backend
+    category: backend
     
   name: review
 spec:
@@ -66,7 +66,7 @@ spec:
         chart: "application-0.0.13"
         release: "NAMESPACE_NAME-review"
         heritage: "Tiller"
-        app: review
+        category: backend
         
     spec:
       containers:
