@@ -36,7 +36,7 @@ metadata:
     chart: "application-0.0.13"
     release: "NAMESPACE_NAME-search"
     heritage: "Tiller"
-    appCategory: backend
+    category: backend
     
   name: search
 spec:
@@ -51,8 +51,8 @@ spec:
         chart: "application-0.0.13"
         release: "NAMESPACE_NAME-search"
         heritage: "Tiller"
-        app: search
-        
+        category: backend
+
     spec:
       containers:
       - name: search

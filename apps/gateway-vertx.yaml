@@ -36,7 +36,7 @@ metadata:
     chart: "application-0.0.13"
     release: "NAMESPACE_NAME-gateway-vertx"
     heritage: "Tiller"
-    appCategory: backend
+    category: backend
     
   annotations:
     reloader.stakater.com/auto: "true"
@@ -54,7 +54,7 @@ spec:
         chart: "application-0.0.13"
         release: "NAMESPACE_NAME-gateway-vertx"
         heritage: "Tiller"
-        app: gateway
+        category: backend
         
     spec:
       containers:

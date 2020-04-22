@@ -51,7 +51,7 @@ metadata:
     chart: "application-0.0.13"
     release: "NAMESPACE_NAME-cart"
     heritage: "Tiller"
-    appCategory: backend
+    category: backend
     
   name: cart
 spec:
@@ -66,7 +66,7 @@ spec:
         chart: "application-0.0.13"
         release: "NAMESPACE_NAME-cart"
         heritage: "Tiller"
-        app: cart
+        category: backend
         
     spec:
       containers:
