@@ -90,6 +90,8 @@ spec:
             value: "8080"
           - name: HTTP_PORT
             value: "8080"
+        securityContext: 
+          runAsUser: 0
           
         livenessProbe:
           failureThreshold: 3
