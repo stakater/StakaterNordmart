@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOMAIN="roks4312stktr-1-345785d9ad39a5ed2bf7de019084c0fb-0000.eu-de.containers.appdomain.cloud"
+DOMAIN="lab-dfa35afe29292c1aaf7804537f813877-0000.osl01.containers.appdomain.cloud"
 
 read -p "Enter Namespace name: " NAMESPACE_NAME
 
