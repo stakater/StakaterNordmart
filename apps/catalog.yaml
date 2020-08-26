@@ -39,7 +39,7 @@ spec:
 ---
 # Source: application/templates/deployment.yaml
 
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -53,6 +53,16 @@ metadata:
     category: backend
   name: catalog
 spec:
+  selector:
+    matchLabels:
+      app: catalog
+      group: com.stakater.platform
+      provider: stakater
+      version: "1.0.0"
+      chart: "application-0.0.13"
+      release: "NAMESPACE_NAME-catalog"
+      heritage: "Tiller"
+      category: backend
   replicas: 1
   template:
     metadata:
