@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOMAIN="lab-dfa35afe29292c1aaf7804537f813877-0000.osl01.containers.appdomain.cloud"
+DOMAIN="bootcamp-dfa35afe29292c1aaf7804537f813877-0000.eu-de.containers.appdomain.cloud"
 
 read -p "Enter Namespace name: " NAMESPACE_NAME
 
