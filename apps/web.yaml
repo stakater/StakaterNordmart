@@ -41,7 +41,7 @@ spec:
 ---
 # Source: application/templates/deployment.yaml
 
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -56,6 +56,16 @@ metadata:
     
   name: web
 spec:
+  selector:
+    matchLabels:
+      app: web
+      group: com.stakater.platform
+      provider: stakater
+      version: "1.0.0"
+      chart: "application-0.0.13"
+      release: "NAMESPACE_NAME-web"
+      heritage: "Tiller"
+      category: frontend
   replicas: 1
   template:
     metadata:
