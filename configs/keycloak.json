@@ -492,18 +492,19 @@
     {
       "id": "d2c95900-9fa3-4613-b41c-687db71d90f6",
       "clientId": "stakater-nordmart-web",
-      "rootUrl": "https://web-veeru-dev.apps.devtest.41b996e9.kubeapp.cloud/",
-      "adminUrl": "https://web-veeru-dev.apps.devtest.41b996e9.kubeapp.cloud/",
+      "rootUrl": "https://web-NAMESPACE_NAME.DOMAIN/",
+      "adminUrl": "https://web-NAMESPACE_NAME.DOMAIN/",
       "baseUrl": "",
       "surrogateAuthRequired": false,
       "enabled": true,
       "clientAuthenticatorType": "client-secret",
       "secret": "ce38b62f-11e3-4a1c-9373-aa6d071f9f48",
       "redirectUris": [
-        "https://web-veeru-dev.apps.devtest.41b996e9.kubeapp.cloud/*"
-      ],
+        "https://web-NAMESPACE_NAME.DOMAIN/*"
+    ],
+      
       "webOrigins": [
-        "https://web-veeru-dev.apps.devtest.41b996e9.kubeapp.cloud/"
+        "https://web-NAMESPACE_NAME.DOMAIN"
       ],
       "notBefore": 0,
       "bearerOnly": false,
