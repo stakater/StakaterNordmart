@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOMAIN="bootcamp-dfa35afe29292c1aaf7804537f813877-0000.eu-de.containers.appdomain.cloud"
+DOMAIN="stakater-os-cluster03-115446ff408166c28833b20a5899787a-0000.eu-de.containers.appdomain.cloud"
 
 read -p "Enter Namespace name: " NAMESPACE_NAME
 
