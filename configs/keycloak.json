@@ -498,10 +498,11 @@
       "surrogateAuthRequired": false,
       "enabled": true,
       "clientAuthenticatorType": "client-secret",
-      "secret": "**********",
+      "secret": "ce38b62f-11e3-4a1c-9373-aa6d071f9f48",
       "redirectUris": [
         "https://web-NAMESPACE_NAME.DOMAIN/*"
-      ],
+    ],
+      
       "webOrigins": [
         "https://web-NAMESPACE_NAME.DOMAIN"
       ],
